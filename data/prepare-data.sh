@@ -8,6 +8,7 @@ grep ", Ic" data.txt | shuf > Ic.txt
 grep ", IIP" data.txt | shuf > IIP.txt
 grep ", IIn" data.txt | shuf > IIn.txt
 shuf train.txt > shuffle-train.txt
+mv shuffle-train.txt train.txt
 
 tail -n 450 Ia.txt | head -n 300 > val.txt
 tail -n 391 Ib.txt | head -n 261 >> val.txt
