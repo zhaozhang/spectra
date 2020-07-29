@@ -1,5 +1,6 @@
 import json
 import glob
+import sys
 
 def convert(spectra):
     '''
@@ -132,7 +133,23 @@ type_dict = {
     "Variable": "N/A"
 }
 
-selected = ["Ia", "Ib", "Ic", "IIL", "IIP", "IIn"]
+label_dict = {
+    "Ia": 0,
+    "Ib": 1,
+    "Ic": 2,
+    "IIP": 3,
+    "IIn": 4
+}
+
+selected = ["Ia", "Ib", "Ic", "IIP", "IIn"]
+
+count = 0
+f_out = open("id-source.csv", "w")
+Ia_out = open("Ia.csv", "w")
+Ib_out = open("Ib.csv", "w")
+Ic_out = open("Ic.csv", "w")
+IIP_out = open("IIP.csv", "w")
+IIn_out = open("IIn.csv", "w")
 
 for f in files:
     with open(f) as f_in:
@@ -153,4 +170,26 @@ for f in files:
                             f_p = [float(v) for v in p[:2]]
                             spectra.append(f_p)
                         features = convert(spectra)
-                        print(f"{features}, {type_dict[types[0]['value']]}, {k}")
+                        if type_dict[types[0]['value']] == "Ia":
+                            out = Ia_out
+                        elif type_dict[types[0]['value']] == "Ib":
+                            out = Ib_out
+                        elif type_dict[types[0]['value']] == "Ic":
+                            out = Ic_out
+                        elif type_dict[types[0]['value']] == "IIP":
+                            out = IIP_out
+                        elif type_dict[types[0]['value']] == "IIn":
+                            out = IIn_out
+                        else:
+                            print(f"error type ${type_dict[types[0]['value']]} not supported")
+                            sys.exit()
+
+                        out.write(f"{count}, {features}, {label_dict[type_dict[types[0]['value']]]}\n")
+                        f_out.write(f"{count}, {type_dict[types[0]['value']]}, {label_dict[type_dict[types[0]['value']]]}, {k}\n")
+                        count += 1
+f_out.close()
+Ia_out.close()
+Ib_out.close()
+Ic_out.close()
+IIP_out.close()
+IIn_out.close()

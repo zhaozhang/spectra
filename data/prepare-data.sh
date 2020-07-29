@@ -1,23 +1,23 @@
 #!/bin/bash
 
-python filter.py > data.txt
+python filter.py 
 
-grep ", Ia" data.txt | shuf -n 1500 > Ia.txt
-grep ", Ib" data.txt | shuf > Ib.txt
-grep ", Ic" data.txt | shuf > Ic.txt
-grep ", IIP" data.txt | shuf > IIP.txt
-grep ", IIn" data.txt | shuf > IIn.txt
-shuf train.txt > shuffle-train.txt
-mv shuffle-train.txt train.txt
+shuf -n 1500 Ia.csv > Ia.csv.1500
 
-tail -n 450 Ia.txt | head -n 300 > val.txt
-tail -n 391 Ib.txt | head -n 261 >> val.txt
-tail -n 423 Ic.txt | head -n 282 >> val.txt
-tail -n 314 IIn.txt | head -n 210 >> val.txt
-tail -n 394 IIP.txt | head -n 262 >> val.txt
+head -n 1050 Ia.csv.1500 > train.csv
+head -n 913 Ib.csv >> train.csv
+head -n 988 Ic.csv >> train.csv
+head -n 734 IIn.csv >> train.csv
+head -n 918 IIP.csv >> train.csv
 
-tail -n 150 Ia.txt > test.txt
-tail -n 130 Ib.txt >> test.txt
-tail -n 141 Ic.txt >> test.txt
-tail -n 132 IIP.txt >> test.txt
-tail -n 104 IIn.txt >> test.txt
+tail -n 450 Ia.csv.1500 | head -n 300 > val.csv
+tail -n 391 Ib.csv | head -n 261 >> val.csv
+tail -n 423 Ic.csv | head -n 282 >> val.csv
+tail -n 314 IIn.csv | head -n 210 >> val.csv
+tail -n 394 IIP.csv | head -n 262 >> val.csv
+
+tail -n 150 Ia.csv.1500 > test.csv
+tail -n 130 Ib.csv >> test.csv
+tail -n 141 Ic.csv >> test.csv
+tail -n 132 IIP.csv >> test.csv
+tail -n 104 IIn.csv >> test.csv
