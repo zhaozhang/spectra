@@ -101,12 +101,12 @@ type_dict = {
 label_dict = {
     "Ia": 0,
     "Ib": 1,
-    "Ic": 1,
-    "IIP": 1,
-    "IIn": 1
+    "Ic": 2,
+    "IIn": 3,
+    "IIP": 4
 }
 
-selected = ["Ia", "Ib", "Ic", "IIP", "IIn"]
+selected = ["Ia", "Ib", "Ic", "IIn", "IIP"]
 
 count = 0
 f_out = open("id-source.csv", "w")
@@ -136,7 +136,7 @@ for f in files:
                             f_p = float(p[1])
                             spectra.append(f_p)
                         if len(spectra) < 2 or len(spectra) > 8192:
-                            pass
+                            continue
 
                         spectra.extend([0]*(8192-len(spectra)))
                         if type_dict[types[0]['value']] == "Ia":
