@@ -146,7 +146,7 @@ model.add(Dropout(0.7))
 model.add(Dense(5, activation='softmax'))
 
 #sgd = SGD(lr=1e-5, momentum=0.9)
-opt = Adam(lr=1e-5)#, clipvalue=5)
+opt = Adam(lr=1e-5, clipvalue=5)
 model.compile(optimizer=opt, loss=cce_function, metrics=['accuracy'])
 print(model.summary())
 
